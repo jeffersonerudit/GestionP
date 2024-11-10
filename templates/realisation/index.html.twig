@@ -1,0 +1,79 @@
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+	Gestion des Realisations
+{% endblock %}
+
+{% block body %}
+
+	{% include 'partials/flash.html.twig' %}
+
+	<p>
+		<a class="btn btn-outline-primary btn-sm" href="{{ path('realisation.create') }}">
+			<i class="bi bi-plus-square" style="font-size: 1.5rem;"></i>
+		</a>
+
+
+	</p>
+<!-- Begin Page Content -->
+
+
+<!-- DataTales Example -->
+	<div class="card shadow mb-4"> <div class="card-header py-3">
+		<h6 class="m-0 font-weight-bold text-primary">Listes des réalisations</h6>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr></tr>
+				</thead>
+
+				
+				<th>Date</th>
+				<th>New client</th>				
+				<th>New partenaire</th>
+				<th>New Contact</th>
+				<th>Rdv-pris</th>
+				<th>Rdv-confirmé</th>
+				<th>Action</th>
+			</tr><thead/>
+		</thead>
+		<tbody>
+			{% for realisation in realisations %}
+				<tr>
+					
+					<td>{{ realisation.DateR|date('Y-m-d') }}</td>
+					<td>{{realisation.Newclient()}}</td>
+					<td>{{realisation.Newpartenaire()}}</td>
+					<td>{{realisation.Newcontact()}}</td>
+					<td>{{realisation.Nbrrdvpris()}}</td>
+					<td>{{realisation.Nbrrdvconf()}}</td>
+					<td>
+						<div class="d-flex gap-1">
+							<a class="btn btn-outline-info btn-sm" href="{{ path('realisation.detail', {id: realisation.id}) }}">
+								<i class="bi bi-view-list" style="font-size: 1.1rem;"></i>
+							</a>
+
+							<a class="btn btn-outline-primary btn-sm" href="{{ path('realisation.edit', {id: realisation.id}) }}">
+								<i class="bi bi-pencil-square" style="font-size: 1.1rem;"></i>
+							</a>
+
+							<a onclick="return confirm('Voulez-vous vraimeent supprimer cette realisation?')" class="btn btn-outline-danger btn-sm" href="{{ path('realisation.delete', {id: realisation.id}) }}">
+								<i class="bi bi-trash3-fill" style="font-size: 1.1rem;"></i>
+							</a>
+
+						</div>
+
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	{{ knp_pagination_render(realisations) }}
+</div></div></div></div><!-- /.container-fluid --></div><!-- End of Main Content -->
+
+
+{% endblock %}
+

@@ -1,0 +1,22 @@
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+	Gestion de Statut des Partenaires
+{% endblock %}
+
+
+{% block title %}Edit StatutP{% endblock %}
+
+{% block body %}
+    <h5>Modification du Statut de partenaire</h5>
+
+    {{ include('statut_p/_form.html.twig', {'button_label': 'Modifier'}) }}
+<div class="d-flex flex-row">
+
+    <a class="btn btn-outline-info btn-sm" href="{{ path('app_statut_p_index') }}">
+        <i class="bi bi-x-squarebi bi-x-square" style="font-size: 1.1rem;"></i>
+    </a>
+
+    {{ include('statut_p/_delete_form.html.twig') }}
+</div>
+{% endblock %}

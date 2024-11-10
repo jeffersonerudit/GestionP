@@ -1,0 +1,89 @@
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+	Gestion des Visiteurs
+{% endblock %}
+
+{% block body %}
+
+	{% include 'partials/flash.html.twig' %}
+
+	<p>
+		<a class="btn btn-outline-primary btn-sm" href="{{ path('visite.create') }}">
+			<i class="bi bi-person-plus" style="font-size: 1.5rem;"></i>
+		</a>
+
+
+	</p>
+<!-- Begin Page Content -->
+
+
+<!-- DataTales Example -->
+	<div class="card shadow mb-4"> <div class="card-header py-3">
+		<h6 class="m-0 font-weight-bold text-primary">Listes des visiteurs</h6>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr></tr>
+				</thead>
+
+				<th>Image</th>
+				<th>{{ knp_pagination_sortable(visites, 'Nom_V', 'r.Nom_V') }}</th>
+				<th>Prenom</th>
+				<th>Adresse</th>
+				<th>Société</th>
+				<th>Poste occupé</th>
+				<th>Téléphone</th>
+				<th>Mail</th>
+				<th>Pays</th>
+				<th>Ville</th>
+				<th>Action</th>
+			</tr><thead/>
+		</thead>
+		<tbody>
+			{% for visite in visites %}
+				<tr>
+					<td><img src="/images/personnes/image-personne.png" alt="user avatar" class="rounded" width="50" height="50"></td>
+					<td class="text-uppercase">
+						<a style=" text-decoration:none; color:blue; " href="{{ path('visite.detail', {id: visite.id}) }}">
+							<strong>{{visite.NomV()}}</strong>
+						</a>
+					</td>
+					<td>{{visite.PrenomV()}}</td>
+					<td>{{visite.Adresse()}}</td>
+					<td>{{visite.Societe()}}</td>
+					<td>{{visite.Poste()}}</td>
+					<td>{{visite.Numero()}}</td>
+					<td>{{visite.Mail()}}</td>
+					<td>{{visite.Pays()}}</td>
+					<td>{{visite.Ville()}}</td>
+					<td>
+						<div class="d-flex gap-1">
+							<a class="btn btn-outline-info btn-sm" href="{{ path('visite.detail', {id: visite.id}) }}">
+								<i class="bi bi-view-list" style="font-size: 1.1rem;"></i>
+							</a>
+
+							<a class="btn btn-outline-primary btn-sm" href="{{ path('visite.edit', {id: visite.id}) }}">
+								<i class="bi bi-pencil-square" style="font-size: 1.1rem;"></i>
+							</a>
+
+							<a onclick="return confirm('Voulez-vous vraimeent supprimer ce visiteur : {{visite.NomV()}} - {{visite.PrenomV()}}?')" class="btn btn-outline-danger btn-sm" href="{{ path('visite.delete', {id: visite.id}) }}">
+								<i class="bi bi-person-x" style="font-size: 1.1rem;"></i>
+							</a>
+
+						</div>
+
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	{{ knp_pagination_render(visites) }}
+</div></div></div></div><!-- /.container-fluid --></div><!-- End of Main Content -->
+
+
+{% endblock %}
+

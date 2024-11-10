@@ -1,0 +1,50 @@
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+Gestion des Relations du partenaire
+{% endblock %}
+
+
+{% block title %}RelationP index{% endblock %}
+
+{% block body %}
+
+{% include 'partials/flash.html.twig' %}
+
+    <h5>Liste des Relations du partenaire</h5>
+
+    <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type_P</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for relation_p in relation_ps %}
+            <tr>
+                <td>{{ relation_p.id }}</td>
+                <td>{{ relation_p.TypeP }}</td>
+                <td>
+                    <a class="btn btn-outline-info btn-sm" href="{{ path('app_relation_p_show', {'id': relation_p.id}) }}">
+                        <i class="bi bi-view-list" style="font-size: 1rem;"></i>
+                    </a>
+                    <a class="btn btn-outline-primary btn-sm" href="{{ path('app_relation_p_edit', {'id': relation_p.id}) }}">
+                        <i class="bi bi-pencil-square" style="font-size: 1.1rem;"></i>
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-outline-primary btn-sm" href="{{ path('app_relation_p_new') }}">
+        <i class="bi bi-plus-square" style="font-size: 1.2rem;"></i>
+    </a>
+
+{% endblock %}

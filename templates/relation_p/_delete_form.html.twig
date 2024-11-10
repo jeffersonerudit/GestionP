@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('app_relation_p_delete', {'id': relation_p.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ce statut de personne : {{ relation_p.TypeP }}?');">
+    <input  type="hidden" name="_token" value="{{ csrf_token('delete' ~ relation_p.id) }}">
+    <button class="btn btn-outline-danger btn-sm" class="btn">
+        <i class="bi bi-trash3-fill" style="font-size: 1.1rem;"></i>
+    </button>
+</form>

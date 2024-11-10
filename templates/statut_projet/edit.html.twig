@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit StatutProjet{% endblock %}
+
+{% block body %}
+    <h1>Edit StatutProjet</h1>
+
+    {{ include('statut_projet/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_statut_projet_index') }}">back to list</a>
+
+    {{ include('statut_projet/_delete_form.html.twig') }}
+{% endblock %}

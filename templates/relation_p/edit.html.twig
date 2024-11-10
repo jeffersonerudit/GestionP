@@ -1,0 +1,22 @@
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+	Gestion des Relations du partenaire
+{% endblock %}
+
+{% block title %}Edit RelationP{% endblock %}
+
+{% block body %}
+    <h5>Modification de la Relation du Partenaire</h5>
+
+    {{ include('relation_p/_form.html.twig', {'button_label': 'Modifier'}) }}
+    <div class="d-flex flex-row">
+
+    <a class="btn btn-outline-info btn-sm" href="{{ path('app_relation_p_index') }}">
+        <i class="bi bi-x-squarebi bi-x-square" style="font-size: 1.1rem;"></i>
+    </a>
+
+    {{ include('relation_p/_delete_form.html.twig') }}
+</div>
+
+{% endblock %}

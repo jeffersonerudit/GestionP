@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InteretPotentiel index{% endblock %}
+
+{% block body %}
+    <h1>InteretPotentiel index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Interet</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for interet_potentiel in interet_potentiels %}
+            <tr>
+                <td>{{ interet_potentiel.id }}</td>
+                <td>{{ interet_potentiel.Interet }}</td>
+                <td>
+                    <a href="{{ path('app_interet_potentiel_show', {'id': interet_potentiel.id}) }}">show</a>
+                    <a href="{{ path('app_interet_potentiel_edit', {'id': interet_potentiel.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_interet_potentiel_new') }}">Create new</a>
+{% endblock %}

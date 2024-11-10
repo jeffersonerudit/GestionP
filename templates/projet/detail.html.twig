@@ -1,0 +1,115 @@
+{% extends 'template.html.twig' %}
+{% block PageTitle %}
+	Information du projet
+{% endblock %}
+
+
+{% block body %}
+
+
+	<div class="col-lg-8">
+		<div class="card z-depth-3">
+			<div class="card-body">
+				<ul class="nav nav-pills nav-pills-primary nav-justified">
+					<li class="nav-item">
+						<a href="javascript:void();" data-target="#profile" data-toggle="pill" class="nav-link active show">
+							<i class="bi bi-view-list" style="font-size: 1.1rem;"></i>
+							<span class="hidden-xs">Detail</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ path('projet.edit', {id: projet.id}) }}" data-target="#messages" data-toggle="" class="nav-link">
+							<i class="bi bi-pencil-square" style="font-size: 1.1rem;"></i>
+							<span class="hidden-xs">Modifier</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ path('app_projet') }}" data-target="#edit" data-toggle="" class="nav-link">
+							<i class="bi bi-arrow-return-left" style="font-size: 1.1rem;"></i>
+							<span class="hidden-xs">Retour</span>
+						</a>
+					</li>
+				</ul>
+				<div class="tab-content p-3">
+					<div class="tab-pane active show" id="profile">
+						<h5 class="mb-3">Detail du projet</h5>
+						<div class="row">
+							<div class="col-md-6">
+								<h6>
+									<strong>Code</strong>
+								</h6>
+								<p>
+									{{ projet.id }}
+								</p>
+								<h6>
+									<strong>Nom du projet</strong>
+								</h6>
+								<p>
+									{{ projet.nomprojet }}
+								</p>	
+								<h6>
+									<strong>Les participant de ce projet</strong>
+								</h6>
+								<p>
+								
+								</p>								
+							</div>
+							<div class="col-md-6">
+
+								<h6>
+									<strong>Date de création</strong>
+								</h6>
+								<p>
+									{{ projet.UpdateAt|date('Y-m-d H:i:s') }}
+
+
+								</p>
+								<h6>
+									<strong>Date de modification</strong>
+								</h6>
+								<p>
+									{{ projet.CreateAt|date('Y-m-d H:i:s') }}
+
+								</p>
+								<h6>
+									<strong>Description</strong>
+								</h6>
+								<p>
+									{{ projet.descriptionprojet }}
+								</p>
+
+
+							</div>
+
+							<div class="col-md-12">
+								<h5 class="mt-2 mb-3">
+									<span class="fa fa-clock-o ion-clock float-right"></span>
+									Statut du projet</h5>
+								<table class="table table-hover table-striped">
+									<tbody>
+										<tr>
+											<td>
+												<strong>Statut :
+												</strong>
+												ce projet est actuellement -
+												<strong>{{ projet.statutprojet.statutp }}</strong>
+											</td>
+										</tr>
+
+									</tbody>
+								</table>
+
+
+							</div>
+						</div>
+						<!--/row-->
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+{% endblock %}
+

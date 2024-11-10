@@ -1,0 +1,220 @@
+{% extends 'template.html.twig' %}
+
+
+{% block PageTitle %}
+
+
+
+	Gestion des Partenaires
+{% endblock %}
+
+{% block body %}
+
+    {% include 'partials/flash.html.twig' %}
+    
+    <p>
+        <a class="btn btn-outline-primary btn-sm" href="{{ path('personne.create') }}">
+            <i class="bi bi-person-plus" style="font-size: 1.5rem;"></i>
+        </a>
+
+
+    </p>
+    
+
+<!-- Begin Page Content -->
+
+
+	<!-- DataTales Example -->
+	<div class="card shadow mb-4">
+		<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">Listes des personnes</h6>
+		</div>
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+					<thead>
+						<tr>
+
+<th>Image</th>
+<th>{{ knp_pagination_sortable(personnes, 'Nom', 'r.Nom') }}</th>
+<th>Prenom</th>
+<th>Adresse</th>
+<th>Société</th>
+<th>Poste occupé</th>
+<th>Téléphone</th>
+<th>Mail</th>
+<th>Pays</th>
+<th>Ville</th>
+<th>Action</th></tr>
+
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+
+<th>Image</th>
+<th>{{ knp_pagination_sortable(personnes, 'Nom', 'r.Nom') }}</th>
+<th>Prenom</th>
+<th>Adresse</th>
+<th>Société</th>
+<th>Poste occupé</th>
+<th>Téléphone</th>
+<th>Mail</th>
+<th>Pays</th>
+<th>Ville</th>
+<th>Action</th></tr>
+
+						</tr>
+					</tfoot>
+					<tbody>
+{% for personne in personnes %}
+	<tr>
+		
+		<td>
+			<img src="{{ vich_uploader_asset(personne, 'imageFile') }}" alt="" class="rounded" width="50" height="50"></td>
+		<td class="text-uppercase">
+			<a style=" text-decoration:none; color:blue; " href="{{ path('personne.detail', {id: personne.id}) }}">
+				<strong>{{personne.Nom()}}</strong>
+			</a>
+		</td>
+		<td>{{personne.Prenom()}}</td>
+		<td>{{personne.Photo()}}</td>
+		<td>{{personne.Societe()}}</td>
+		<td>{{personne.Poste()}}</td>
+		<td>{{personne.Numero()}}</td>
+		<td>{{personne.Mail()}}</td>
+		<td>{{personne.Pays()}}</td>
+		<td>{{personne.Ville()}}</td>
+		<td>
+			<div class="d-flex gap-1">
+				<a class="btn btn-outline-info btn-sm" href="{{ path('personne.detail', {id: personne.id}) }}">
+					<i class="bi bi-view-list" style="font-size: 1.1rem;"></i>
+				</a>
+
+				<a class="btn btn-outline-primary btn-sm" href="{{ path('personne.edit', {id: personne.id}) }}">
+					<i class="bi bi-pencil-square" style="font-size: 1.1rem;"></i>
+				</a>
+
+                <a onclick="return confirm('Voulez-vous vraimeent supprimer {{personne.Nom()}} - {{personne.Prenom()}} ?')" class="btn btn-outline-danger btn-sm" href="{{ path('personne.delete', {id: personne.id}) }}">
+					<i class="bi bi-person-x" style="font-size: 1.1rem;"></i>
+				</a>
+
+			</div>
+
+		</td>
+	</tr>
+{% endfor %}
+
+					</tbody>
+				</table>
+{{ knp_pagination_render(personnes) }}
+
+			</div>
+		</div>
+	</div>
+
+</div>
+<!-- /.container-fluid --></div><!-- End of Main Content -->
+
+
+
+<!-- Begin Page Content -->
+<div
+	class="container-fluid">
+
+	<!-- Page Heading -->
+	<div class="d-sm-flex align-items-center justify-content-between mb-4">
+		<h1 class="h3 mb-0 text-gray-800">Gestion Configuration du Partenaire</h1>
+	</div>
+
+	<div
+		class="row">
+
+		
+
+
+	<div class="row">
+
+		<div
+			class="col-lg-6">
+
+			
+
+			<!-- Basic Card Example -->
+			<div
+				class="card shadow mb-4">
+				<!-- Card Header - Accordion -->
+				<a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+					<h6 class="m-0 font-weight-bold text-primary ">Gestion de Relation du Partenaire</h6>
+				</a>
+				<!-- Card Content - Collapse -->
+				<div class="collapse show" id="collapseCardExample">
+					<div class="card-body">
+						<p>Si vous souhaitez gérer la relation des partenaires avec l'entreprise vous être au bon endroit.
+						Vous avez la possibilité d'ajouter, modifier, supprimer ou même voir les détails des relations déjà existants.
+						pour se faire je vous invite à cliquez sur le boutton.
+						</p>
+						<a class="btn btn-outline-info btn-sm" href="{{ path('app_relation_p_index') }}">Gérez les relations du Partenaire</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+<div
+	class="col-lg-6">
+
+
+	<!-- Basic Card Example -->
+	<div
+		class="card shadow mb-4">
+		<!-- Card Header - Accordion -->
+		<a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+			<h6 class="m-0 font-weight-bold text-primary ">Gestion de Statut du Partenaire</h6>
+		</a>
+		<!-- Card Content - Collapse -->
+		<div class="collapse show" id="collapseCardExample">
+			<div class="card-body">
+				<p>Si vous souhaitez gérer les statiuts des partenaires avec l'entreprise vous être au bon endroit.
+											Vous avez la possibilité d'ajouter, modifier, supprimer ou même voir les détails des statuts déjà existants.
+											pour se faire je vous invite à cliquez sur le boutton.
+				</p>
+				<a class="btn btn-outline-info btn-sm" href="{{ path('app_statut_p_index') }}">Gérez les Statuts du Partenaire</a>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+		<div
+			class="col-lg-6">
+
+			
+
+			<!-- Basic Card Example -->
+			<div
+				class="card shadow mb-4">
+				<!-- Card Header - Accordion -->
+				<a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+					<h6 class="m-0 font-weight-bold text-primary ">Gestion d'Interêt du Partenaire</h6>
+				</a>
+				<!-- Card Content - Collapse -->
+				<div class="collapse show" id="collapseCardExample">
+					<div class="card-body">
+						<p>Si vous souhaitez gérer les interêts des partenaires avec l'entreprise vous être au bon endroit.
+						Vous avez la possibilité d'ajouter, modifier, supprimer ou même voir les détails des interêts potentiels déjà existants.
+						pour se faire je vous invite à cliquez sur le boutton.
+						</p>
+						<a class="btn btn-outline-info btn-sm" href="{{ path('app_interet_potentiel_index') }}">Gérez les Inteerêts du Partenaire</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+</div>
+<!-- /.container-fluid -->
+
+
+    
+
+{% endblock %}

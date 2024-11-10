@@ -1,0 +1,204 @@
+{% extends 'template.html.twig' %}
+{% block PageTitle %}
+	Information du visteur
+{% endblock %}
+
+
+{% block body %}
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="profile-card-4 z-depth-3">
+					<div class="card">
+						<div class="card-body text-center bg-primary rounded-top">
+							<div class="user-box"><img src="/images/personnes/image-personne.png" alt="user avatar">
+							</div>
+							<h5 class="mb-1 text-white">{{visite.NomV()}}
+								{{visite.PrenomV()}}</h5>
+							<h6 class="text-light">{{visite.Societe()}}</h6>
+
+						</div>
+						<div class="card-body">
+							<ul class="list-group shadow-none">
+								<li class="list-group-item">
+									<div class="list-icon">
+										<i class="fa fa-phone-square"></i>
+									</div>
+									<div class="list-details">
+										<span>{{visite.Numero()}}</span>
+
+										<small>Mobile Number</small>
+									</div>
+								</li>
+								<li class="list-group-item">
+									<div class="list-icon">
+										<i class="fa fa-envelope"></i>
+									</div>
+									<div class="list-details">
+										<span>{{visite.Mail()}}</span>
+
+										<small>Email Address</small>
+									</div>
+								</li>
+								<li class="list-group-item">
+									<div class="list-icon">
+										<i class="bi bi-person-workspace"></i>
+									</div>
+									<div class="list-details">
+										<span>{{visite.Poste()}}</span>
+										<small>Poste</small>
+									</div>
+								</li>
+							</ul>
+							<div class="row text-center mt-4">
+								<div class="col p-2">
+									<h4 class="mb-1 line-height-5">154</h4>
+									<small class="mb-0 font-weight-bold">Projects</small>
+								</div>
+								<div class="col p-2">
+									<h4 class="mb-1 line-height-5">2.2k</h4>
+									<small class="mb-0 font-weight-bold">Followers</small>
+								</div>
+								<div class="col p-2">
+									<h4 class="mb-1 line-height-5">9.1k</h4>
+									<small class="mb-0 font-weight-bold">Views</small>
+								</div>
+							</div>
+						</div>
+						<div class="card-footer text-center">
+							<a href="javascript:void()" class="btn-social btn-facebook waves-effect waves-light m-1">
+								<i class="fa fa-facebook"></i>
+							</a>
+							<a href="javascript:void()" class="btn-social btn-google-plus waves-effect waves-light m-1">
+								<i class="fa fa-google-plus"></i>
+							</a>
+							<a href="javascript:void()" class="list-inline-item btn-social btn-behance waves-effect waves-light">
+								<i class="fa fa-behance"></i>
+							</a>
+							<a href="javascript:void()" class="list-inline-item btn-social btn-dribbble waves-effect waves-light">
+								<i class="fa fa-dribbble"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-8">
+				<div class="card z-depth-3">
+					<div class="card-body">
+						<ul class="nav nav-pills nav-pills-primary nav-justified">
+							<li class="nav-item">
+								<a href="javascript:void();" data-target="#profile" data-toggle="pill" class="nav-link active show">
+									<i class="bi bi-view-list" style="font-size: 1.1rem;"></i>
+									<span class="hidden-xs">Detail</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="{{ path('visite.edit', {id: visite.id}) }}" data-target="#messages" data-toggle="" class="nav-link">
+									<i class="bi bi-pencil-square" style="font-size: 1.1rem;"></i>
+									<span class="hidden-xs">Modifier</span>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="{{ path('app_visite') }}" data-target="#edit" data-toggle="" class="nav-link">
+									<i class="bi bi-arrow-return-left" style="font-size: 1.1rem;"></i>
+									<span class="hidden-xs">Retour</span>
+								</a>
+							</li>
+						</ul>
+						<div class="tab-content p-3">
+							<div class="tab-pane active show" id="profile">
+								<h5 class="mb-3">Detail du visiteur</h5>
+								<div class="row">
+									<div class="col-md-6">
+										<h6>
+											<strong>Code</strong>
+										</h6>
+										<p>
+											{{ visite.id }}
+										</p>
+										<h6>
+											<strong>Adresse</strong>
+										</h6>
+										<p>
+											{{ visite.Adresse }}
+										</p>
+										<h6>
+											<strong>Pays</strong>
+										</h6>
+										<p>
+											{{ visite.Pays }}
+										</p>
+										<h6>
+											<strong>Ville</strong>
+										</h6>
+										<p>
+											{{ visite.Ville }}
+										</p>
+									</div>
+									<div class="col-md-6">
+
+										<h6>
+											<strong>Date de création</strong>
+										</h6>
+										<p>
+											{{ visite.Date|date('Y-m-d H:i:s') }}
+
+
+										</p>
+										<h6>
+											<strong>Date de modification</strong>
+										</h6>
+										<p>
+											{{ visite.DateAt|date('Y-m-d H:i:s') }}
+
+										</p>
+										<h6>
+											<strong>Description</strong>
+										</h6>
+										<p>
+											{{ visite.Description }}
+										</p>
+
+
+									</div>
+
+									<div class="col-md-12">
+										<h5 class="mt-2 mb-3">
+											<span class="fa fa-clock-o ion-clock float-right"></span>
+											Relation de la visiteur</h5>
+										<table class="table table-hover table-striped">
+											<tbody>
+												<tr>
+													<td>
+														<strong>Relation de la visite :
+														</strong>
+														La visite est venu pour -
+														<strong>{{ visite.Typeviste.typev }}</strong>
+													</td>
+												</tr>
+												<tr>
+													<td>
+														<strong>Statut de la visite :
+														</strong>
+														La visite est -
+														<strong>{{ visite.Natureviste.naturev }}</strong>
+													</td>
+												</tr>
+												
+											</tbody>
+										</table>
+
+
+									</div>
+								</div>
+								<!--/row-->
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
+		{% endblock %}

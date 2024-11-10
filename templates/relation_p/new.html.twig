@@ -1,0 +1,19 @@
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+	Gestion des Relations du partenaire
+{% endblock %}
+
+{% block title %}New RelationP{% endblock %}
+
+{% block body %}
+    <h5>Creation d'une nouvelle Relation de Partenaire </h5>
+
+    {{ include('relation_p/_form.html.twig') }}
+
+<a class="btn btn-info btn-sm" href="{{ path('app_relation_p_index') }}">
+    <i class="bi bi-x-squarebi bi-x-square" style="font-size: 1.1rem;"></i>
+</a>
+
+
+{% endblock %}

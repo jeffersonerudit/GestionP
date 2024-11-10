@@ -1,0 +1,18 @@
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+	Gestion de Statut des Partenaires
+{% endblock %}
+
+
+{% block title %}New StatutP{% endblock %}
+
+{% block body %}
+    <h5>Creation d'un nouveau Statut de Partenaire</h5>
+
+    {{ include('statut_p/_form.html.twig') }}
+
+    <a class="btn btn-info btn-sm" href="{{ path('app_statut_p_index') }}">
+        <i class="bi bi-x-squarebi bi-x-square" style="font-size: 1.1rem;"></i>
+    </a>
+{% endblock %}

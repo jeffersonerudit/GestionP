@@ -1,0 +1,36 @@
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+	Gestion de Statut des Partenaires
+{% endblock %}
+
+
+{% block title %}StatutP{% endblock %}
+
+{% block body %}
+    <h5>Detail du statut de partenaire</h5>
+
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ statut_p.id }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{{ statut_p.Statut }}</td>
+            </tr>
+        </tbody>
+    </table>
+<div class="d-flex flex-row">
+    <a class="btn btn-outline-info btn-sm" href="{{ path('app_statut_p_index') }}">
+        <i class="bi bi-x-squarebi bi-x-square" style="font-size: 1.1rem;"></i>
+    </a>
+
+    <a class="btn btn-outline-primary btn-sm" href="{{ path('app_statut_p_edit', {'id': statut_p.id}) }}">
+        <i class="bi bi-pencil-square" style="font-size: 1.1rem;"></i>
+    </a>
+
+    {{ include('statut_p/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

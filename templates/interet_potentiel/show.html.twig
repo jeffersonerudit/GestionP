@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InteretPotentiel{% endblock %}
+
+{% block body %}
+    <h1>InteretPotentiel</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ interet_potentiel.id }}</td>
+            </tr>
+            <tr>
+                <th>Interet</th>
+                <td>{{ interet_potentiel.Interet }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_interet_potentiel_index') }}">back to list</a>
+
+    <a href="{{ path('app_interet_potentiel_edit', {'id': interet_potentiel.id}) }}">edit</a>
+
+    {{ include('interet_potentiel/_delete_form.html.twig') }}
+{% endblock %}

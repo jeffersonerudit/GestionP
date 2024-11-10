@@ -1,0 +1,8 @@
+<form method="post" action="{{ path('app_statut_p_delete', {'id': statut_p.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ce statut de personne : {{ statut_p.Statut }}?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ statut_p.id) }}">
+<button class="btn btn-outline-danger btn-sm">
+	<i class="bi bi-trash3-fill" style="font-size: 1.1rem;"></i>
+</button>
+
+
+</form>

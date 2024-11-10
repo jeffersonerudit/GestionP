@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New InteretPotentiel{% endblock %}
+
+{% block body %}
+    <h1>Create new InteretPotentiel</h1>
+
+    {{ include('interet_potentiel/_form.html.twig') }}
+
+    <a href="{{ path('app_interet_potentiel_index') }}">back to list</a>
+{% endblock %}

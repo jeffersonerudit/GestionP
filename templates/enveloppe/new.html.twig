@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Enveloppe{% endblock %}
+
+{% block body %}
+    <h1>Create new Enveloppe</h1>
+
+    {{ include('enveloppe/_form.html.twig') }}
+
+    <a href="{{ path('app_enveloppe_index') }}">back to list</a>
+{% endblock %}
