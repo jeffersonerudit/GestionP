@@ -22,11 +22,7 @@ class Projet
     #[ORM\Column(length: 255)]
     private ?string $Description_Projet = null;
 
-    /**
-     * @var Collection<int, Personne>
-     */
-    #[ORM\ManyToMany(targetEntity: Personne::class)]
-    private Collection $Personne;
+
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -38,9 +34,15 @@ class Projet
     #[ORM\Column]
     private ?\DateTimeImmutable $UpdateAt = null;
 
+    /**
+     * @var Collection<int, Personne>
+     */
+    #[ORM\ManyToMany(targetEntity: Personne::class)]
+    private Collection $ProjetP;
+
     public function __construct()
     {
-        $this->Personne = new ArrayCollection();
+        $this->ProjetP = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -72,31 +74,7 @@ class Projet
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Personne>
-     */
-    public function getPersonne(): Collection
-    {
-        return $this->Personne;
-    }
-
-    public function addPersonne(Personne $personne): static
-    {
-        if (!$this->Personne->contains($personne)) {
-            $this->Personne->add($personne);
-        }
-
-        return $this;
-    }
-
-    public function removePersonne(Personne $personne): static
-    {
-        $this->Personne->removeElement($personne);
-
-        return $this;
-    }
-
+    
     public function getStatutProjet(): ?StatutProjet
     {
         return $this->StatutProjet;
@@ -132,4 +110,30 @@ class Projet
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Personne>
+     */
+    public function getProjetP(): Collection
+    {
+        return $this->ProjetP;
+    }
+
+    public function addProjetP(Personne $projetP): static
+    {
+        if (!$this->ProjetP->contains($projetP)) {
+            $this->ProjetP->add($projetP);
+        }
+
+        return $this;
+    }
+
+    public function removeProjetP(Personne $projetP): static
+    {
+        $this->ProjetP->removeElement($projetP);
+
+        return $this;
+    }
+
+    
 }

@@ -1,0 +1,133 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block PageTitle %}
+	Gestion des utilisateurs de Smac-Industries
+{% endblock %}
+
+
+{% block body %}
+{% include 'partials/flash.html.twig' %}
+
+<h5>Droits Utilisateurs</h5>
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+	<div class="card-header py-3">
+        <div class="d-flex flex-row float-left" >
+		<h6 class="m-0 font-weight-bold text-primary">Listes des utilisateurs</h6>
+</div>
+<!-- Topbar Search -->
+<div class="d-flex flex-row float-right">
+
+	<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+		<div class="input-group">
+			<input type="text" class="form-control bg border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+			<div class="input-group-append">
+				<button class="btn btn-primary" type="button">
+					<i class="fas fa-search fa-sm"></i>
+				</button>
+			</div>
+		</div>
+	</form>
+
+
+</div>
+	</div>
+
+
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr></tr>
+				</thead>
+
+                <th>Image</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Droits</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td><img src="{{ vich_uploader_asset(user, 'imageFile') }}" alt="" class="rounded" width="50" height="50"></td></td>
+                <td>{{ user.Nom }}</td>
+                <td>{{ user.Prenom }}</td>
+                <td>{{ user.email }}</td>
+                {#<td>{{ user.roles ? user.roles|json_encode : '' }}</td>#}
+                <td>
+
+                    {% if ('ROLE_SUPER_ADMIN' in user.roles) %}
+                        Super administrateur
+                       
+                    {% elseif ('ROLE_ADMIN' in user.roles) %} 
+                        Administrateur   
+                    {% elseif ('ROLE_STAGE' in user.roles) %} 
+                        Stagiaire
+                    {% elseif ('ROLE_EDITOR' in user.roles) %} 
+                        Editeur
+                    {% else %} 
+                             Utilisateur
+                    {% endif %}
+
+                {# {% for role in user.roles %}
+                    {{ role }}
+                 {% endfor %} #}
+                
+                </td>
+                {#<td>{{ user.password }}</td>
+                <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                <td>{{ user.Nom }}</td>
+                <td>{{ user.Prenom }}</td>
+                <td>{{ user.Societe }}</td>
+                <td>{{ user.Poste }}</td>
+                <td>{{ user.Adresse }}</td>
+                <td>{{ user.Phone }}</td>
+                <td>{{ user.CreatedAt ? user.CreatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ user.UpdatedAt ? user.UpdatedAt|date('Y-m-d H:i:s') : '' }}</td>#}
+                <td>
+                {% if ('ROLE_SUPER_ADMIN' in user.roles) == false %}
+                    
+                       {% if ('ROLE_ADMIN' in user.roles) == false %}
+                       <a onclick="return confirm('Voulez-vous affecter le role ADMIN à cet utilisateur?')" class="btn btn-danger btn-sm " href="{{ path('app_user_to_admin', {'id': user.id}) }}">ADMIN</a>
+                        {% endif %}
+
+                        {% if ('ROLE_STAGE' in user.roles) == false %}
+                        <a onclick="return confirm('Voulez-vous affecter le role STAGE à cet utilisateur?')" class="btn btn-outline-warning btn-sm" href="{{ path('app_user_to_stage', {'id': user.id}) }}">STAGE</a>
+                        {% endif %}
+
+                        {% if ('ROLE_EDITOR' in user.roles) == false %}
+                             <a onclick="return confirm('Voulez-vous affecter le role EDITOR à cet utilisateur?')" class="btn btn-outline-success btn-sm" href="{{ path('app_user_to_editor', {'id': user.id}) }}">EDITOR</a>                   
+                        {% endif %}
+
+                    
+                   <a onclick="return confirm('Voulez-vous vrament affer le role USER à cet utilisateur?')" class="btn btn-outline-primary btn-sm" href="{{ path('app_user_remove_user_role', {'id': user.id}) }}">USER</a>
+                    
+                {% endif %}
+                    
+                </td>
+                <td>
+                     <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="15">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div></div></div></div><!-- /.container-fluid --></div><!-- End of Main Content -->
+
+
+
+{# <a href="{{ path('app_user_new') }}">Create  #}
+
+{% endblock %}

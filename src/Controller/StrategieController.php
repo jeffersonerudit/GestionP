@@ -17,12 +17,21 @@ class StrategieController extends AbstractController
 
     public function index(Request $request, StrategieRepository $repository): Response
     {
+       // $superAdmin = ["ROLE_SUPER_ADMIN", "ROLE_ADMIN", "ROLE_EDITOR", "ROLE_USER"];
+       // $admin = ["ROLE_ADMIN", "ROLE_EDITOR", "ROLE_USER"];
+       // $editor = ["ROLE_EDITOR", "ROLE_USER"];
+       // $user = [];
+
+        if ($this->getUser()) {
+
         $page = $request->query->getInt('page', 1);
         $limit = 4;
         $strategies = $repository->paginateStrategies($page);
         return $this->render('strategie/index.html.twig', [
             'strategies' => $strategies
         ]);
+         }
+        return $this->redirectToRoute('app_login');
     }
 
     #[Route('/strategie/{id}/detail', name: 'strategie.detail', methods: ['GET'])]
@@ -87,4 +96,5 @@ class StrategieController extends AbstractController
         $this->addFlash('success', 'La strategie a été bien supprimée');
         return $this->redirectToRoute('app_strategie');
     }
+
 }

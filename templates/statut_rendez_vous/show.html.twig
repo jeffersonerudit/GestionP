@@ -1,11 +1,16 @@
-{% extends 'base.html.twig' %}
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+	Gestion du Statut de Rendez-vous
+{% endblock %}
+
 
 {% block title %}StatutRendezVous{% endblock %}
 
 {% block body %}
-    <h1>StatutRendezVous</h1>
+<h5>Detail du statut de rendez-vous</h5>
 
-    <table class="table">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -17,10 +22,16 @@
             </tr>
         </tbody>
     </table>
+<div class="d-flex flex-row">
 
-    <a href="{{ path('app_statut_rendez_vous_index') }}">back to list</a>
+    <a class="btn btn-outline-info btn-sm" href="{{ path('app_statut_rendez_vous_index') }}">
+        <i class="bi bi-x-squarebi bi-x-square" style="font-size: 1.1rem;"></i>
+    </a>
 
-    <a href="{{ path('app_statut_rendez_vous_edit', {'id': statut_rendez_vou.id}) }}">edit</a>
+    <a class="btn btn-outline-primary btn-sm" href="{{ path('app_statut_rendez_vous_edit', {'id': statut_rendez_vou.id}) }}">
+        <i class="bi bi-pencil-square" style="font-size: 1.1rem;"></i>
+    </a>
 
     {{ include('statut_rendez_vous/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

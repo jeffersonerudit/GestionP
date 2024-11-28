@@ -75,7 +75,7 @@
                                 <h6>
                                 	<strong>Date prévue du RDV</strong>
                                 </h6>
-                                <p>
+                                <p class="text-danger">
                                 	{{ rendezvous.DateRdv|date('Y-m-d H:i:s') }}
 
                                 </p>
@@ -108,7 +108,7 @@
 												<strong>Statut du RDV :
 												</strong>
 												le rendez-vous est -
-												<strong>{{ rendezvous.statutrdv.statutrdv }}</strong>
+												<strong class="text-warning">{{ rendezvous.statutrdv.statutrdv }}</strong>
 											</td>
 										</tr>
                                         <tr>

@@ -1,0 +1,316 @@
+{% extends 'template.html.twig' %}
+
+{%  block head %}
+
+
+	<div
+		class="row">
+
+		<!-- Earnings (Monthly) Card Example -->
+		<div class="col-xl-3 col-md-6 mb-4">
+			<div class="card border-left-primary shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+								Earnings (Monthly)</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-calendar fa-2x text-gray-300"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Earnings (Annual) Card Example -->
+		<div class="col-xl-3 col-md-6 mb-4">
+			<div class="card border-left-success shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+								Earnings (Annual)</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Tasks Card Example -->
+		<div class="col-xl-3 col-md-6 mb-4">
+			<div class="card border-left-info shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+							</div>
+							<div class="row no-gutters align-items-center">
+								<div class="col-auto">
+									<div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+								</div>
+								<div class="col">
+									<div class="progress progress-sm mr-2">
+										<div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Pending Requests Card Example -->
+		<div class="col-xl-3 col-md-6 mb-4">
+			<div class="card border-left-warning shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+								Pending Requests</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-comments fa-2x text-gray-300"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row"></div>
+
+
+{% endblock %}
+
+
+{% block PageTitle %}
+
+
+	Gestion des Partenaires
+{% endblock %}
+
+{% block body %}
+
+	{% include 'partials/flash.html.twig' %}
+
+	<p>
+		<a class="btn btn-outline-primary btn-sm" href="{{ path('personne.create') }}">
+			<i class="bi bi-person-plus" style="font-size: 1.5rem;"></i>
+		</a>
+
+
+	</p>
+
+
+	<!-- Begin Page Content -->
+
+
+	<!-- DataTales Example -->
+	<div class="card shadow mb-4">
+		<div class="card-header py-3">
+			<div class="d-flex flex-row float-left">
+				<h6 class="m-0 font-weight-bold text-primary">Listes des partenaires avec le mot "{{ word }}"</h6>
+			</div>
+			<!-- Topbar Search -->
+			<div class="d-flex flex-row float-right">
+
+				<form data-turbo="false" method="POST" action="{{ path('app_search_personne') }}" class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+					<div class="input-group">
+						<input name="word" type="text" class="form-control bg border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+						<div class="input-group-append">
+							<button class="btn btn-primary" type="button">
+								<i class="fas fa-search fa-sm"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+
+
+			</div>
+		</div>
+
+
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+					<thead>
+						<tr>
+
+							<th>Image</th>
+							<th>Nom</th>
+							<th>Prenom</th>
+							<th>Adresse</th>
+							<th>Société</th>
+							<th>Poste occupé</th>
+							<th>Téléphone</th>
+							<th>Mail</th>
+							<th>Pays</th>
+							<th>Ville</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+
+					<th>Image</th>
+					<th>Nom</th>
+					<th>Prenom</th>
+					<th>Adresse</th>
+					<th>Société</th>
+					<th>Poste occupé</th>
+					<th>Téléphone</th>
+					<th>Mail</th>
+					<th>Pays</th>
+					<th>Ville</th>
+					<th>Action</th>
+				</tr>
+			</tfoot>
+		</tr>
+	</tfoot>
+	<tbody>
+		{% for personne in personnes %}
+			<tr>
+
+				<td>
+					<img src="{{ vich_uploader_asset(personne, 'imageFile') }}" alt="" class="rounded" width="50" height="50"></td>
+				<td class="text-uppercase text-primary">
+					<a style=" " href="{{ path('personne.detail', {id: personne.id}) }}">
+						<strong>{{personne.Nom()}}</strong>
+					</a>
+				</td>
+				<td class="text-primary">{{personne.Prenom()}}</td>
+				<td>{{personne.Photo()}}</td>
+				<td class="text-info">{{personne.Societe()}}</td>
+				<td class="text-primary">{{personne.Poste()}}</td>
+				<td>{{personne.Numero()}}</td>
+				<td>{{personne.Mail()}}</td>
+				<td>{{personne.Pays()}}</td>
+				<td>{{personne.Ville()}}</td>
+				<td>
+					<div class="d-flex gap-1">
+						<a class="btn btn-outline-info btn-sm" href="{{ path('personne.detail', {id: personne.id}) }}">
+							<i class="bi bi-view-list" style="font-size: 1.1rem;"></i>
+						</a>
+
+						<a class="btn btn-outline-primary btn-sm" href="{{ path('personne.edit', {id: personne.id}) }}">
+							<i class="bi bi-pencil-square" style="font-size: 1.1rem;"></i>
+						</a>
+
+						<a onclick="return confirm('Voulez-vous vraimeent supprimer {{personne.Nom()}} - {{personne.Prenom()}} ?')" class="btn btn-outline-danger btn-sm" href="{{ path('personne.delete', {id: personne.id}) }}">
+							<i class="bi bi-person-x" style="font-size: 1.1rem;"></i>
+						</a>
+
+					</div>
+
+				</td>
+			</tr>
+		{% endfor %}
+
+	</tbody>
+</table>
+
+
+</div></div></div></div><!-- /.container-fluid --></div><!-- End of Main Content --><!-- Begin Page Content --><divclass="container-fluid"><!-- Page Heading --><div class="d-sm-flex align-items-center justify-content-between mb-4"><h1 class="h3 mb-0 text-gray-800">Gestion Configuration du Partenaire</h1></div><div class="row"><div class="row"><divclass="col-lg-6"><!-- Basic Card Example --><div
+class="card shadow mb-4">
+
+<!-- Begin Page Content -->
+<div
+	class="container-fluid">
+
+	<!-- Page Heading -->
+
+	<div class="row">
+
+		<div
+			class="col-lg-6">
+
+
+			<!-- Basic Card Example -->
+			<div
+				class="card shadow mb-4">
+				<!-- Card Header - Accordion -->
+				<a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+					<h6 class="m-0 font-weight-bold text-primary ">Gestion de Relation du Partenaire</h6>
+				</a>
+				<!-- Card Content - Collapse -->
+				<div class="collapse show" id="collapseCardExample">
+					<div class="card-body">
+						<p>Si vous souhaitez gérer la relation des partenaires avec l'entreprise vous être au bon endroit.
+																					Vous avez la possibilité d'ajouter, modifier, supprimer ou même voir les détails des relations déjà existants.
+																					pour se faire je vous invite à cliquez sur le boutton.
+						</p>
+						<a class="btn btn-outline-info btn-sm" href="{{ path('app_relation_p_index') }}">Gérez les relations du Partenaire</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div
+			class="col-lg-6">
+
+
+			<!-- Basic Card Example -->
+			<div
+				class="card shadow mb-4">
+				<!-- Card Header - Accordion -->
+				<a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+					<h6 class="m-0 font-weight-bold text-primary ">Gestion de Statut du Partenaire</h6>
+				</a>
+				<!-- Card Content - Collapse -->
+				<div class="collapse show" id="collapseCardExample">
+					<div class="card-body">
+						<p>Si vous souhaitez gérer les statiuts des partenaires avec l'entreprise vous être au bon endroit.
+																										Vous avez la possibilité d'ajouter, modifier, supprimer ou même voir les détails des statuts déjà existants.
+																										pour se faire je vous invite à cliquez sur le boutton.
+						</p>
+						<a class="btn btn-outline-info btn-sm" href="{{ path('app_statut_p_index') }}">Gérez les Statuts du Partenaire</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div
+			class="col-lg-6">
+
+
+			<!-- Basic Card Example -->
+			<div
+				class="card shadow mb-4">
+				<!-- Card Header - Accordion -->
+				<a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+					<h6 class="m-0 font-weight-bold text-primary ">Gestion d'Interêt du Partenaire</h6>
+				</a>
+				<!-- Card Content - Collapse -->
+				<div class="collapse show" id="collapseCardExample">
+					<div class="card-body">
+						<p>Si vous souhaitez gérer les interêts des partenaires avec l'entreprise vous être au bon endroit.
+																					Vous avez la possibilité d'ajouter, modifier, supprimer ou même voir les détails des interêts potentiels déjà existants.
+																					pour se faire je vous invite à cliquez sur le boutton.
+						</p>
+						<a class="btn btn-outline-info btn-sm" href="{{ path('app_interet_potentiel_index') }}">Gérez les Inteerêts du Partenaire</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- /.container-fluid -->
+
+
+{% endblock %}
+

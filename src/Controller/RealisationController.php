@@ -10,21 +10,31 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class RealisationController extends AbstractController
 {
-    #[Route('/realisation', name: 'app_realisation')]
+    #[Route('/realisation', name: 'app_realisation'), IsGranted('ROLE_STAGE')]
     public function index(Request $request, RealisationRepository $repository): Response
     {
+        $superAdmin = ["ROLE_SUPER_ADMIN", "ROLE_ADMIN", "ROLE_STAGE", "ROLE_EDITOR", "ROLE_USER"];
+        $admin = ["ROLE_ADMIN", "STAGE", "ROLE_EDITOR", "ROLE_USER"];
+        $stage = ["STAGE", "ROLE_EDITOR", "ROLE_USER"];
+        $editor = ["ROLE_EDITOR", "ROLE_USER"];
+        $user = [];
+
+        //if ($this->getUser()) {
         $page = $request->query->getInt('page', 1);
         $limit = 4;
         $realisations = $repository->paginateRealisations($page);
         return $this->render('realisation/index.html.twig', [
             'realisations' => $realisations
         ]);
+       // }
+        return $this->redirectToRoute('app_login');
     }
 
-    #[Route('/realisation/{id}/detail', name: 'realisation.detail', methods: ['GET'])]
+    #[Route('/realisation/{id}/detail', name: 'realisation.detail', methods: ['GET']), IsGranted('ROLE_ADMIN')]
     public function detail(Realisation $realisation): Response
     {
         return $this->render('realisation/detail.html.twig', [
@@ -33,7 +43,7 @@ class RealisationController extends AbstractController
     }
 
 
-    #[Route('/realisation/{id}/edit', name: 'realisation.edit')]
+    #[Route('/realisation/{id}/edit', name: 'realisation.edit'), IsGranted('ROLE_ADMIN')]
     public function edit(Realisation $realisation, Request $request, EntityManagerInterface
     $em)
     {
@@ -57,7 +67,7 @@ class RealisationController extends AbstractController
         ]);
     }
 
-    #[Route('/realisation/create', name: 'realisation.create')]
+    #[Route('/realisation/create', name: 'realisation.create'), IsGranted('ROLE_ADMIN')]
     public function create(Request $request, EntityManagerInterface $em): Response
     {
         $realisation = new Realisation();
@@ -78,7 +88,7 @@ class RealisationController extends AbstractController
         ]);
     }
 
-    #[Route('/realisation/{id}', name: 'realisation.delete')]
+    #[Route('/realisation/{id}', name: 'realisation.delete'), IsGranted('ROLE_ADMIN')]
     public function remove(Realisation $realisation, EntityManagerInterface $em)
     {
         $em->remove($realisation);

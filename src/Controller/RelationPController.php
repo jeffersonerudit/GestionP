@@ -10,10 +10,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/relation/p')]
 final class RelationPController extends AbstractController{
-    #[Route(name: 'app_relation_p_index', methods: ['GET'])]
+    #[Route(name: 'app_relation_p_index', methods: ['GET']), IsGranted('ROLE_ADMIN')]
     public function index(RelationPRepository $relationPRepository): Response
     {
         return $this->render('relation_p/index.html.twig', [
@@ -21,7 +22,7 @@ final class RelationPController extends AbstractController{
         ]);
     }
 
-    #[Route('/new', name: 'app_relation_p_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_relation_p_new', methods: ['GET', 'POST']), IsGranted('ROLE_ADMIN')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $relationP = new RelationP();
@@ -41,7 +42,7 @@ final class RelationPController extends AbstractController{
         ]);
     }
 
-    #[Route('/{id}', name: 'app_relation_p_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_relation_p_show', methods: ['GET']), IsGranted('ROLE_ADMIN')]
     public function show(RelationP $relationP): Response
     {
         return $this->render('relation_p/show.html.twig', [
@@ -49,7 +50,7 @@ final class RelationPController extends AbstractController{
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_relation_p_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_relation_p_edit', methods: ['GET', 'POST']), IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, RelationP $relationP, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(RelationPType::class, $relationP);
@@ -67,7 +68,7 @@ final class RelationPController extends AbstractController{
         ]);
     }
 
-    #[Route('/{id}', name: 'app_relation_p_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_relation_p_delete', methods: ['POST']), IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, RelationP $relationP, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$relationP->getId(), $request->getPayload()->getString('_token'))) {

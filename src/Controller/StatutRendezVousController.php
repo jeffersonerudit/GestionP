@@ -10,10 +10,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/statut/rendezvous')]
+#[Route('/statutrendezvous')]
 final class StatutRendezVousController extends AbstractController{
-    #[Route(name: 'app_statut_rendez_vous_index', methods: ['GET'])]
+    #[Route(name: 'app_statut_rendez_vous_index', methods: ['GET']), IsGranted('ROLE_ADMIN')]
     public function index(StatutRendezVousRepository $statutRendezVousRepository): Response
     {
         return $this->render('statut_rendez_vous/index.html.twig', [
@@ -21,7 +22,7 @@ final class StatutRendezVousController extends AbstractController{
         ]);
     }
 
-    #[Route('/new', name: 'app_statut_rendez_vous_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_statut_rendez_vous_new', methods: ['GET', 'POST']), IsGranted('ROLE_ADMIN')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $statutRendezVou = new StatutRendezVous();
@@ -31,7 +32,7 @@ final class StatutRendezVousController extends AbstractController{
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($statutRendezVou);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Le statut du rendez-vous a été crée avec succès');
             return $this->redirectToRoute('app_statut_rendez_vous_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -41,7 +42,7 @@ final class StatutRendezVousController extends AbstractController{
         ]);
     }
 
-    #[Route('/{id}', name: 'app_statut_rendez_vous_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_statut_rendez_vous_show', methods: ['GET']), IsGranted('ROLE_ADMIN')]
     public function show(StatutRendezVous $statutRendezVou): Response
     {
         return $this->render('statut_rendez_vous/show.html.twig', [
@@ -49,7 +50,7 @@ final class StatutRendezVousController extends AbstractController{
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_statut_rendez_vous_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_statut_rendez_vous_edit', methods: ['GET', 'POST']), IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, StatutRendezVous $statutRendezVou, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(StatutRendezVousType::class, $statutRendezVou);
@@ -57,7 +58,7 @@ final class StatutRendezVousController extends AbstractController{
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-
+            $this->addFlash('success', 'Le statut du rendez-vous a été modifié avec succès');
             return $this->redirectToRoute('app_statut_rendez_vous_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -67,14 +68,14 @@ final class StatutRendezVousController extends AbstractController{
         ]);
     }
 
-    #[Route('/{id}', name: 'app_statut_rendez_vous_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_statut_rendez_vous_delete', methods: ['POST']), IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, StatutRendezVous $statutRendezVou, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$statutRendezVou->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($statutRendezVou);
             $entityManager->flush();
         }
-
+        $this->addFlash('success', 'Le statut du rendez-vous a été supprimé avec succès');
         return $this->redirectToRoute('app_statut_rendez_vous_index', [], Response::HTTP_SEE_OTHER);
     }
 }

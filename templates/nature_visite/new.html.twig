@@ -1,11 +1,18 @@
-{% extends 'base.html.twig' %}
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+	Gestion de Nature des Visiteurs
+{% endblock %}
+
 
 {% block title %}New NatureVisite{% endblock %}
 
 {% block body %}
-    <h1>Create new NatureVisite</h1>
+    <h5>Creation d'une nouvelle du visiteur</h5>
 
     {{ include('nature_visite/_form.html.twig') }}
 
-    <a href="{{ path('app_nature_visite_index') }}">back to list</a>
+    <a class="btn btn-outline-info btn-sm" href="{{ path('app_nature_visite_index') }}">
+        <i class="bi bi-x-squarebi bi-x-square" style="font-size: 1.1rem;"></i>
+    </a>
 {% endblock %}

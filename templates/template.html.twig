@@ -8,11 +8,13 @@
 		<meta name="author" content=""/>
 		<title>
 			{% block title %}
-				Static Navigation - SB Admin
+				Smac-Industries
 			{% endblock %}
 		</title>
 <link href="{{ asset('assets/css/styles.css')}}" rel="stylesheet"/>
 <link href="{{ asset('assets/css/stylesdetail.css')}}" rel="stylesheet"/>
+<link href="{{ asset('assets/css/stylesprofil.css')}}" rel="stylesheet"/>
+
 
 <link href="{{ asset('assets/node_modules/bootstrap-icons/font/bootstrap-icons.min.css')}}" rel="stylesheet"/>
 <link href="{{ asset('assets/node_modules/bootstrap-icons/icons/bootstrap-icons.svg')}}" rel="stylesheet"/>
@@ -33,6 +35,7 @@
 
 	<body
 		id="page-top">
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
 		<!-- Page Wrapper -->
 		<div
@@ -43,7 +46,7 @@
 				class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 				<!-- Sidebar - Brand -->
-				<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+				<a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
 					<div class="sidebar-brand-icon rotate-n-15">
 						
 					</div>
@@ -58,7 +61,7 @@
 
 				<!-- Nav Item - Dashboard -->
 				<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_visite') }}">
+						<a class="nav-link" href="#">
 						<i class="fas fa-fw fa-tachometer-alt"></i>
 						<span>Dashboard</span>
 					</a>
@@ -85,21 +88,31 @@
 							<a class="collapse-item" href="{{ path('app_visite') }}">
 							<i class="bi bi-houses-fill" style="font-size: 1.1rem; color:#4E73DF;"></i>
 							<span>Accueil</span></a>
+
+						{% if is_granted('ROLE_STAGE') %}
 							<a class="collapse-item" href="{{ path('app_personne') }}">
-							<i class="bi bi-person-heart" style="font-size: 1.1rem; color:#4E73DF;"></i>
-							<span>Partenaires</span></a>
+								<i class="bi bi-person-heart" style="font-size: 1.1rem; color:#4E73DF;"></i>
+								<span>Partenaires</span>
+							</a>
+						
 							<a class="collapse-item" href="{{ path('app_strategie') }}">
-							<i class="bi bi-bank2" style="font-size: 1.1rem; color:#4E73DF;"></i>
-							<span>Strategies</span></a>
+								<i class="bi bi-bank2" style="font-size: 1.1rem; color:#4E73DF;"></i>
+								<span>Strategies</span>
+							</a>
+
 							<a class="collapse-item" href="{{ path('app_projet') }}">
-							<i class="bi bi-buildings-fill" style="font-size: 1.1rem; color:#4E73DF;"></i>
-							<span>Projets</span></a>
+								<i class="bi bi-buildings-fill" style="font-size: 1.1rem; color:#4E73DF;"></i>
+								<span>Projets</span>
+							</a>
 							<a class="collapse-item" href="{{ path('app_rendezvous') }}">
-							<i class="bi bi-cup-hot-fill" style="font-size: 1.1rem; color:#4E73DF;"></i>
-							<span>Rendez-Vous</span></a>
+								<i class="bi bi-cup-hot-fill" style="font-size: 1.1rem; color:#4E73DF;"></i>
+								<span>Rendez-Vous</span>
+							</a>
 							<a class="collapse-item" href="{{ path('app_realisation') }}">
-							<i class="bi bi-currency-exchange" style="font-size: 1.1rem; color:#4E73DF;"></i>
-							<span>Réalisations</span></a>
+								<i class="bi bi-currency-exchange" style="font-size: 1.1rem; color:#4E73DF;"></i>
+								<span>Réalisations</span>
+							</a>
+						{% endif %}
 
 							
 						</div>
@@ -110,15 +123,15 @@
 				<li class="nav-item">
 					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
 						<i class="fas fa-fw fa-wrench"></i>
-						<span>Utilities</span>
+						<span>Gestion des Utilisateurs</span>
 					</a>
 					<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
-							<h6 class="collapse-header">Custom Utilities:</h6>
-							<a class="collapse-item" href="utilities-color.html">Colors</a>
-							<a class="collapse-item" href="utilities-border.html">Borders</a>
-							<a class="collapse-item" href="utilities-animation.html">Animations</a>
-							<a class="collapse-item" href="utilities-other.html">Other</a>
+							<h6 class="collapse-header">Gestion des Utilisateur:</h6>
+							<a class="collapse-item" href="{{ path('app_user_index') }}">Droit d'utilisateur</a>
+							<a class="collapse-item" href="#">#</a>
+							<a class="collapse-item" href="#">#</a>
+							<a class="collapse-item" href="#">#</a>
 						</div>
 					</div>
 				</li>
@@ -141,20 +154,20 @@
 					<div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
 							<h6 class="collapse-header">Login Screens:</h6>
-							<a class="collapse-item" href="login.html">Login</a>
-							<a class="collapse-item" href="register.html">Register</a>
-							<a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+							<a class="collapse-item" href="#">#</a>
+							<a class="collapse-item" href="#">#</a>
+							<a class="collapse-item" href="#">#</a>
 							<div class="collapse-divider"></div>
-							<h6 class="collapse-header">Other Pages:</h6>
-							<a class="collapse-item" href="404.html">404 Page</a>
-							<a class="collapse-item active" href="blank.html">Blank Page</a>
+							<h6 class="collapse-header">#</h6>
+							<a class="collapse-item" href="#">#</a>
+							<a class="collapse-item active" href="#">#</a>
 						</div>
 					</div>
 				</li>
 
 				<!-- Nav Item - Charts -->
 				<li class="nav-item">
-					<a class="nav-link" href="charts.html">
+					<a class="nav-link" href="#">
 						<i class="fas fa-fw fa-chart-area"></i>
 						<span>Charts</span>
 					</a>
@@ -162,7 +175,7 @@
 
 				<!-- Nav Item - Tables -->
 				<li class="nav-item">
-					<a class="nav-link" href="tables.html">
+					<a class="nav-link" href="#">
 						<i class="fas fa-fw fa-table"></i>
 						<span>Tables</span>
 					</a>
@@ -187,7 +200,7 @@
 				<!-- Main Content -->
 				<div
 					id="content">
-
+					
 					<!-- Topbar -->
 					<nav
 						class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -212,7 +225,7 @@
 						<!-- Topbar Navbar -->
 						<ul
 							class="navbar-nav ml-auto">
-
+							
 							<!-- Nav Item - Search Dropdown (Visible Only XS) -->
 							<li class="nav-item dropdown no-arrow d-sm-none">
 								<a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -232,7 +245,7 @@
 									</form>
 								</div>
 							</li>
-
+							
 							<!-- Nav Item - Alerts -->
 							<li class="nav-item dropdown no-arrow mx-1">
 								<a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -346,43 +359,78 @@
 
 							<!-- Nav Item - User Information -->
 							<li class="nav-item dropdown no-arrow">
+							{% if app.user %}
+								
+							
 								<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-									<img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+									<span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ app.user.Nom }} {{ app.user.Prenom }}
+									<br>
+									<span>
+										<div>
+										<span class="badge badge-secondary bg-warning">
+											
+											{% if ('ROLE_SUPER_ADMIN' in app.user.roles) %}
+                       							 Super administrateur
+                       
+                    							{% elseif ('ROLE_ADMIN' in app.user.roles) %} 
+                     							   Administrateur   
+                    							{% elseif ('ROLE_STAGE' in app.user.roles) %} 
+                    							    Stagiaire
+                    							{% elseif ('ROLE_EDITOR' in ap.user.roles) %} 
+                    							    Editeur
+                    							{% else %} 
+                    							         Utilisateur
+                    							{% endif %}
+											
+										</span>
+									</div>
+									</span>
+									 </span>
+									
+									<img class="img-profile rounded-circle" src="{{ vich_uploader_asset(app.user, 'imageFile') }}">
+									
 								</a>
+								
+								
 								<!-- Dropdown - User Information -->
 								<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-									<a class="dropdown-item" href="#">
+									<a class="dropdown-item" href="{{ path('app_user_profil', {'id':app.user.id}) }}">
 										<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
 										Profile
 									</a>
-									<a class="dropdown-item" href="#">
+									<a class="dropdown-item" href="{{ path('app_user_profiledit', {'id':app.user.id}) }}">
 										<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
 										Settings
 									</a>
+									{% endif %}
 									<a class="dropdown-item" href="#">
 										<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
 										Activity Log
 									</a>
 									<div class="dropdown-divider"></div>
-									<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+									<a class="dropdown-item" href="{{ path('app_logout') }}" data-toggle="modal" data-target="#logoutModal">
 										<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 										Logout
 									</a>
 								</div>
-							</li>
+							</li>				
+
+							{% endif %}
 
 						</ul>
 
 					</nav>
 					<!-- End of Topbar -->
 
+
+
+
 					<!-- Begin Page Content -->
 					<div
 						class="container-fluid">
 
-
-
+							
+		
 
 						<!-- Page Heading -->
 						<!-- Begin Page Content -->
@@ -392,27 +440,33 @@
 
 
 
+					
 
-
+								
 						<div class="container-fluid px-4">
+						
+					{% block head %}
+									
+								{% endblock %}
 							<h3 class="mt-4 text-center text-primary">
+								
 								{% block PageTitle %}
-									Template
+									
 								{% endblock %}
 							</h3>
-							<div class="card mb-4">
-								<div class="card-body">
+							{#<div class="card mb-4">
+								<div class="card-body">#}
 									{% block body %}
 										template body
 										{{dump(app.flashes)}}
 										{% include 'partials/flash.html.twig' %}
 
 									{% endblock %}
-								</div>
-							</div>
+								{#</div>
+							</div>#}
 							<div style="height: 100vh"></div>
 							<div class="card mb-4">
-								<div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div>
+								<div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation for smac industies.</div>
 							</div>
 						</div>
 					</div>
@@ -455,7 +509,7 @@
 					<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
 					<div class="modal-footer">
 						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-						<a class="btn btn-primary" href="login.html">Logout</a>
+						<a class="btn btn-primary" href="{{ path('app_logout') }}">Logout</a>
 					</div>
 				</div>
 			</div>

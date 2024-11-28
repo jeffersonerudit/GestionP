@@ -17,7 +17,7 @@
 
         <thead>
             <tr>
-                <th>Id</th>
+                
                 <th>Statut</th>
                 <th>actions</th>
             </tr>
@@ -25,7 +25,7 @@
         <tbody>
         {% for statut_p in statut_ps %}
             <tr>
-                <td>{{ statut_p.id }}</td>
+                
                 <td>{{ statut_p.Statut }}</td>
                 <td>
                     <a class="btn btn-outline-info btn-sm" href="{{ path('app_statut_p_show', {'id': statut_p.id}) }}">
@@ -44,7 +44,12 @@
         </tbody>
     </table>
 
+     <div class="d-flex flex-row">
+    <a class="btn btn-outline-info btn-sm" href="{{ path('app_personne') }}">
+        <i class="bi bi-x-squarebi bi-x-square" style="font-size: 1.1rem;"></i>
+    </a>
     <a class="btn btn-outline-primary btn-sm" href="{{ path('app_statut_p_new') }}">
         <i class="bi bi-plus-square" style="font-size: 1.2rem;"></i>
     </a>
+    </div>
 {% endblock %}

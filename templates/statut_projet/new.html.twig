@@ -1,11 +1,19 @@
-{% extends 'base.html.twig' %}
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+	Gestion de Statut de Projet
+{% endblock %}
+
 
 {% block title %}New StatutProjet{% endblock %}
 
 {% block body %}
-    <h1>Create new StatutProjet</h1>
+<h5>Creation d'un nouveau Statut de Projet</h5>
+
 
     {{ include('statut_projet/_form.html.twig') }}
 
-    <a href="{{ path('app_statut_projet_index') }}">back to list</a>
+    <a  class="btn btn-info btn-sm"href="{{ path('app_statut_projet_index') }}">
+        <i class="bi bi-x-squarebi bi-x-square" style="font-size: 1.1rem;"></i>
+    </a>
 {% endblock %}

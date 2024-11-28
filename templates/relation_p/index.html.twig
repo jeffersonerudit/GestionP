@@ -16,7 +16,7 @@ Gestion des Relations du partenaire
     <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th>Id</th>
+                
                 <th>Type_P</th>
                 <th>actions</th>
             </tr>
@@ -24,7 +24,7 @@ Gestion des Relations du partenaire
         <tbody>
         {% for relation_p in relation_ps %}
             <tr>
-                <td>{{ relation_p.id }}</td>
+                
                 <td>{{ relation_p.TypeP }}</td>
                 <td>
                     <a class="btn btn-outline-info btn-sm" href="{{ path('app_relation_p_show', {'id': relation_p.id}) }}">
@@ -43,8 +43,13 @@ Gestion des Relations du partenaire
         </tbody>
     </table>
 
+    <div class="d-flex flex-row">
+    <a class="btn btn-outline-info btn-sm" href="{{ path('app_personne') }}">
+        <i class="bi bi-x-squarebi bi-x-square" style="font-size: 1.1rem;"></i>
+    </a>
     <a class="btn btn-outline-primary btn-sm" href="{{ path('app_relation_p_new') }}">
         <i class="bi bi-plus-square" style="font-size: 1.2rem;"></i>
     </a>
+    </div>
 
 {% endblock %}

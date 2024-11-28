@@ -49,7 +49,7 @@ class Personne
     #[Assert\NotBlank()]
     #[Assert\Positive(message: 'cette valeur doit être positive.')]
     #[ORM\Column]
-    private ?int $Numero = null;
+    private ?string $Numero = null;
 
     #[ORM\Column(length: 50)]
     private ?string $Mail = null;
@@ -69,11 +69,7 @@ class Personne
     #[ORM\JoinColumn(nullable: false)]
     private ?StatutP $Statut_P = null;
 
-    /**
-     * @var Collection<int, Projet>
-     */
-    #[ORM\OneToMany(targetEntity: Projet::class, mappedBy: 'Personne')]
-    private Collection $Projet;
+  
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -87,12 +83,7 @@ class Personne
 
     #[Vich\UploadableField(mapping: "personnes", fileNameProperty: "image")]
     #[Assert\Image()]
-    private ?File $imageFile = null;
-
-    public function __construct()
-    {
-        $this->Projet = new ArrayCollection();
-    }
+    private ?File $imageFile = null;  
 
     public function getId(): ?int
     {
@@ -183,12 +174,12 @@ class Personne
         return $this;
     }
 
-    public function getNumero(): ?int
+    public function getNumero(): ?string
     {
         return $this->Numero;
     }
 
-    public function setNumero(int $Numero): static
+    public function setNumero(string $Numero): static
     {
         $this->Numero = $Numero;
 
@@ -254,37 +245,7 @@ class Personne
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Projet>
-     */
-    public function getProjet(): Collection
-    {
-        return $this->Projet;
-    }
-
-    public function addProjet(Projet $projet): static
-    {
-        if (!$this->Projet->contains($projet)) {
-            $this->Projet->add($projet);
-            $projet->setPersonne($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProjet(Projet $projet): static
-    {
-        if ($this->Projet->removeElement($projet)) {
-            // set the owning side to null (unless already changed)
-            if ($projet->getPersonne() === $this) {
-                $projet->setPersonne(null);
-            }
-        }
-
-        return $this;
-    }
-
+    
     public function getInteret(): ?InteretPotentiel
     {
         return $this->Interet;
@@ -346,4 +307,5 @@ class Personne
 
       
     }
+
 }

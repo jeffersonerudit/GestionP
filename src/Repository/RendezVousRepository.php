@@ -33,6 +33,18 @@ class RendezVousRepository extends ServiceEntityRepository
         );
     }
 
+    public function searchRendezvous(string $query)
+    {
+        return $this->createQueryBuilder('r')
+            ->where('r.Nom_Rdv LIKE :query')
+            ->orWhere('r.Type_Rdv LIKE :query')
+            ->orWhere('r.Lieu LIKE :query')
+            ->orWhere('r.Description LIKE :query')
+            ->setParameter('query', value: '%' . $query . '%')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 //    /**
 //     * @return RendezVous[] Returns an array of RendezVous objects
 //     */

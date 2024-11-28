@@ -1,13 +1,23 @@
-{% extends 'base.html.twig' %}
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+	Gestion du Statut de Rendez-vous
+{% endblock %}
+
 
 {% block title %}Edit StatutRendezVous{% endblock %}
 
 {% block body %}
-    <h1>Edit StatutRendezVous</h1>
+    <h5>Modification du Statut de Rendez-vous</h5>
 
-    {{ include('statut_rendez_vous/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('statut_rendez_vous/_form.html.twig', {'button_label': 'Modifier'}) }}
+<div class="d-flex flex-row">
 
-    <a href="{{ path('app_statut_rendez_vous_index') }}">back to list</a>
+    <a class="btn btn-outline-info btn-sm" href="{{ path('app_statut_rendez_vous_index') }}">
+        <i class="bi bi-x-squarebi bi-x-square" style="font-size: 1.1rem;"></i>
+    </a>
 
     {{ include('statut_rendez_vous/_delete_form.html.twig') }}
+</div>
+
 {% endblock %}

@@ -1,14 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+	Gestion du Statut de Rendez-vous
+{% endblock %}
+
 
 {% block title %}StatutRendezVous index{% endblock %}
 
 {% block body %}
-    <h1>StatutRendezVous index</h1>
+{% include 'partials/flash.html.twig' %}
 
-    <table class="table">
+    <h5>Liste de statut du rendez-vous</h5>
+
+<table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+        <thead>
         <thead>
             <tr>
-                <th>Id</th>
+                
                 <th>Statut_Rdv</th>
                 <th>actions</th>
             </tr>
@@ -16,11 +24,15 @@
         <tbody>
         {% for statut_rendez_vou in statut_rendez_vouses %}
             <tr>
-                <td>{{ statut_rendez_vou.id }}</td>
+                
                 <td>{{ statut_rendez_vou.StatutRdv }}</td>
                 <td>
-                    <a href="{{ path('app_statut_rendez_vous_show', {'id': statut_rendez_vou.id}) }}">show</a>
-                    <a href="{{ path('app_statut_rendez_vous_edit', {'id': statut_rendez_vou.id}) }}">edit</a>
+                    <a class="btn btn-outline-info btn-sm" href="{{ path('app_statut_rendez_vous_show', {'id': statut_rendez_vou.id}) }}">
+                        <i class="bi bi-view-list" style="font-size: 1rem;"></i>
+                    </a>
+                    <a class="btn btn-outline-primary btn-sm" href="{{ path('app_statut_rendez_vous_edit', {'id': statut_rendez_vou.id}) }}">
+                        <i class="bi bi-pencil-square" style="font-size: 1.1rem;"></i>
+                    </a>
                 </td>
             </tr>
         {% else %}
@@ -30,6 +42,13 @@
         {% endfor %}
         </tbody>
     </table>
+     <div class="d-flex flex-row">
+    <a class="btn btn-outline-info btn-sm" href="{{ path('app_rendezvous') }}">
+        <i class="bi bi-x-squarebi bi-x-square" style="font-size: 1.1rem;"></i>
+    </a>
 
-    <a href="{{ path('app_statut_rendez_vous_new') }}">Create new</a>
+    <a class="btn btn-outline-primary btn-sm" href="{{ path('app_statut_rendez_vous_new') }}">
+        <i class="bi bi-plus-square" style="font-size: 1.2rem;"></i>
+    </a>
+    </div>
 {% endblock %}

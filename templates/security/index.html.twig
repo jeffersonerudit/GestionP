@@ -1,0 +1,65 @@
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+	Gestion des Relations du partenaire
+{% endblock %}
+
+
+{% block title %}RelationP index
+{% endblock %}
+
+{% block body %}
+
+	{% include 'partials/flash.html.twig' %}
+
+	<h5>Liste des Relations du partenaire</h5>
+
+	<table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+		<thead>
+			<tr>
+
+				<th>Type_P</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+				<tr>
+
+						<td>
+			<img src="{{ vich_uploader_asset(user, 'imageFile') }}" alt="" class="rounded" width="50" height="50"></td>
+		<td class="text-uppercase text-primary">
+			<a style=" " href="{{ path('personne.detail', {id: user.id}) }}">
+				<strong>{{user.Nom()}}</strong>
+			</a>
+		</td>
+		<td class="text-primary">{{user.Prenom()}}</td>
+        
+		<td>{{user.Adresse()}}</td>
+		<td class="text-info">{{user.Societe()}}</td>
+		<td class="text-primary">{{user.Poste()}}</td>
+		<td>{{user.Phone()}}</td>
+		<td>{{user.email()}}</td>
+		
+		
+					
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="3">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<div class="d-flex flex-row">
+		<a class="btn btn-outline-info btn-sm" href="{{ path('app_personne') }}">
+			<i class="bi bi-x-squarebi bi-x-square" style="font-size: 1.1rem;"></i>
+		</a>
+		<a class="btn btn-outline-primary btn-sm" href="{{ path('app_relation_p_new') }}">
+			<i class="bi bi-plus-square" style="font-size: 1.2rem;"></i>
+		</a>
+	</div>
+
+{% endblock %}
+

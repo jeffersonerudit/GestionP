@@ -1,14 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+	Gestion de Type des Visiteurs
+{% endblock %}
+
 
 {% block title %}TypeViste index{% endblock %}
 
 {% block body %}
-    <h1>TypeViste index</h1>
+{% include 'partials/flash.html.twig' %}
 
-    <table class="table">
+<h5>Liste de type de visiteur</h5>
+
+<table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+
         <thead>
             <tr>
-                <th>Id</th>
+                
                 <th>Type_V</th>
                 <th>actions</th>
             </tr>
@@ -16,11 +24,15 @@
         <tbody>
         {% for type_viste in type_vistes %}
             <tr>
-                <td>{{ type_viste.id }}</td>
+                
                 <td>{{ type_viste.TypeV }}</td>
                 <td>
-                    <a href="{{ path('app_type_viste_show', {'id': type_viste.id}) }}">show</a>
-                    <a href="{{ path('app_type_viste_edit', {'id': type_viste.id}) }}">edit</a>
+                    <a class="btn btn-outline-info btn-sm" href="{{ path('app_type_viste_show', {'id': type_viste.id}) }}">
+                        <i class="bi bi-view-list" style="font-size: 1rem;"></i>
+                    </a>
+                    <a class="btn btn-outline-primary btn-sm" href="{{ path('app_type_viste_edit', {'id': type_viste.id}) }}">
+                        <i class="bi bi-pencil-square" style="font-size: 1.1rem;"></i>
+                    </a>
                 </td>
             </tr>
         {% else %}
@@ -30,6 +42,13 @@
         {% endfor %}
         </tbody>
     </table>
+<div class="d-flex flex-row">
+	<a class="btn btn-outline-info btn-sm" href="{{ path('app_visite') }}">
+		<i class="bi bi-x-squarebi bi-x-square" style="font-size: 1.1rem;"></i>
+	</a>
 
-    <a href="{{ path('app_type_viste_new') }}">Create new</a>
+    <a class="btn btn-outline-primary btn-sm" href="{{ path('app_type_viste_new') }}">
+        <i class="bi bi-plus-square" style="font-size: 1.2rem;"></i>
+    </a>
+    </div>
 {% endblock %}

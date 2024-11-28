@@ -1,14 +1,21 @@
-{% extends 'base.html.twig' %}
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+	Gestion des Interêts Potentiels des Partenaires
+{% endblock %}
 
 {% block title %}InteretPotentiel index{% endblock %}
 
 {% block body %}
-    <h1>InteretPotentiel index</h1>
+{% include 'partials/flash.html.twig' %}
 
-    <table class="table">
+<h5>Liste des interêt potentions des partenaires</h5>
+
+<table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+
         <thead>
             <tr>
-                <th>Id</th>
+                
                 <th>Interet</th>
                 <th>actions</th>
             </tr>
@@ -16,11 +23,15 @@
         <tbody>
         {% for interet_potentiel in interet_potentiels %}
             <tr>
-                <td>{{ interet_potentiel.id }}</td>
+               
                 <td>{{ interet_potentiel.Interet }}</td>
                 <td>
-                    <a href="{{ path('app_interet_potentiel_show', {'id': interet_potentiel.id}) }}">show</a>
-                    <a href="{{ path('app_interet_potentiel_edit', {'id': interet_potentiel.id}) }}">edit</a>
+                    <a class="btn btn-outline-info btn-sm" href="{{ path('app_interet_potentiel_show', {'id': interet_potentiel.id}) }}">
+                        <i class="bi bi-view-list" style="font-size: 1rem;"></i>
+                    </a>
+                    <a class="btn btn-outline-primary btn-sm" href="{{ path('app_interet_potentiel_edit', {'id': interet_potentiel.id}) }}">
+                        <i class="bi bi-pencil-square" style="font-size: 1.1rem;"></i>
+                    </a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +42,12 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_interet_potentiel_new') }}">Create new</a>
+    <div class="d-flex flex-row">
+    <a class="btn btn-outline-info btn-sm" href="{{ path('app_personne') }}">
+        <i class="bi bi-x-squarebi bi-x-square" style="font-size: 1.1rem;"></i>
+    </a>
+    <a class="btn btn-outline-primary btn-sm" href="{{ path('app_interet_potentiel_new') }}">
+        <i class="bi bi-plus-square" style="font-size: 1.2rem;"></i>
+    </a>
+    </div>
 {% endblock %}

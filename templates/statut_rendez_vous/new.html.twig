@@ -1,11 +1,18 @@
-{% extends 'base.html.twig' %}
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+	Gestion du Statut de Rendez-vous
+{% endblock %}
+
 
 {% block title %}New StatutRendezVous{% endblock %}
 
 {% block body %}
-    <h1>Create new StatutRendezVous</h1>
+    <h5>Creation d'un nouveau Statut de Rendez-vous</h5>
 
     {{ include('statut_rendez_vous/_form.html.twig') }}
 
-    <a href="{{ path('app_statut_rendez_vous_index') }}">back to list</a>
+    <a class="btn btn-info btn-sm" href="{{ path('app_statut_rendez_vous_index') }}">
+        <i class="bi bi-x-squarebi bi-x-square" style="font-size: 1.1rem;"></i>
+    </a>
 {% endblock %}

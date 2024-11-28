@@ -33,6 +33,17 @@ class VisteRepository extends ServiceEntityRepository
         );
     }
 
+    public function search(string $query)
+    {
+        return $this->createQueryBuilder('v')
+        ->where('v.Nom_V LIKE :query')
+        ->orWhere('v.Prenom_V LIKE :query')
+        ->setParameter('query', value:'%'.$query.'%')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Viste[] Returns an array of Viste objects
 //     */

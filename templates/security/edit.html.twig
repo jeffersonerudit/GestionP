@@ -1,0 +1,38 @@
+
+
+{% block title %}Register
+{% endblock %}
+
+{% block body %}
+	
+		<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+	{% endfor %}
+
+	<h3>Register</h3>
+
+	{{ form_errors(form) }}
+
+	
+	<div class="d-flex">
+   {{ form_row(form.imageFile) }}
+
+	</div>
+	<div class="d-flex">
+		{{ form_row(form.Nom) }}
+		{{ form_row(form.Prenom) }}
+	</div>
+	<div class="d-flex">
+		{{ form_row(form.Societe) }}
+		{{ form_row(form.Poste) }}
+	</div>
+	<div class="d-flex">
+		{{ form_row(form.Phone) }}
+		{{ form_row(form.Adresse) }}
+	</div>
+	
+	{{ form_row(form.agreeTerms) }}
+
+	<button class="btn btn-outline-primary" type="submit" class="btn">Register</button>
+	
+{% endblock %}
+

@@ -11,21 +11,31 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ProjetController extends AbstractController
 {
-    #[Route('/projet', name: 'app_projet')]
+    #[Route('/projet', name: 'app_projet'), IsGranted('ROLE_ADMIN')]
     public function index(Request $request, ProjetRepository $repository): Response
     {
+        $superAdmin = ["ROLE_SUPER_ADMIN", "ROLE_ADMIN", "ROLE_EDITOR", "ROLE_USER"];
+        $admin = ["ROLE_ADMIN", "ROLE_EDITOR", "ROLE_USER"];
+        $editor = ["ROLE_EDITOR", "ROLE_USER"];
+        $user = [];
+
+        if ($this->getUser()) {
+
         $page = $request->query->getInt('page', 1);
         $limit = 4;
         $projets = $repository->paginateProjets($page);
         return $this->render('projet/index.html.twig', [
             'projets' => $projets
         ]);
+        }
+        return $this->redirectToRoute('app_login');
     }
 
-    #[Route('/projet/{id}/detail', name: 'projet.detail', methods: ['GET'])]
+    #[Route('/projet/{id}/detail', name: 'projet.detail', methods: ['GET']), IsGranted('ROLE_ADMIN')]
     public function detail(Projet $projet): Response
     {
         return $this->render('projet/detail.html.twig', [
@@ -34,7 +44,7 @@ class ProjetController extends AbstractController
     }
 
 
-    #[Route('/projet/{id}/edit', name: 'projet.edit')]
+    #[Route('/projet/{id}/edit', name: 'projet.edit'), IsGranted('ROLE_ADMIN')]
     public function edit(Projet $projet, Request $request, EntityManagerInterface
     $em)
     {
@@ -58,7 +68,7 @@ class ProjetController extends AbstractController
         ]);
     }
 
-    #[Route('/projet/create', name: 'projet.create')]
+    #[Route('/projet/create', name: 'projet.create'), IsGranted('ROLE_ADMIN')]
     public function create(Request $request, EntityManagerInterface $em): Response
     {
         $projet = new Projet();
@@ -79,7 +89,7 @@ class ProjetController extends AbstractController
         ]);
     }
 
-    #[Route('/projet/{id}', name: 'projet.delete')]
+    #[Route('/projet/{id}', name: 'projet.delete'), IsGranted('ROLE_ADMIN')]
     public function remove(Projet $projet, EntityManagerInterface $em)
     {
         $em->remove($projet);

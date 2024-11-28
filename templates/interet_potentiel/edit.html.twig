@@ -1,13 +1,20 @@
-{% extends 'base.html.twig' %}
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+	Gestion des Interêts Potentiels des Partenaires
+{% endblock %}
 
 {% block title %}Edit InteretPotentiel{% endblock %}
 
 {% block body %}
-    <h1>Edit InteretPotentiel</h1>
+    <h5>Modification de l'interet potentiel du partenaire</h5>
 
-    {{ include('interet_potentiel/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_interet_potentiel_index') }}">back to list</a>
+    {{ include('interet_potentiel/_form.html.twig', {'button_label': 'Modifier'}) }}
+<div class="d-flex flex-row">
+    <a class="btn btn-outline-info btn-sm" href="{{ path('app_interet_potentiel_index') }}">
+        <i class="bi bi-x-squarebi bi-x-square" style="font-size: 1.1rem;"></i>
+    </a>
 
     {{ include('interet_potentiel/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

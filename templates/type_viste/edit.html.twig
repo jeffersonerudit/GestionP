@@ -1,13 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+	Gestion de Type des Visiteurs
+{% endblock %}
+
 
 {% block title %}Edit TypeViste{% endblock %}
 
 {% block body %}
-    <h1>Edit TypeViste</h1>
+    <h5>Modification du type de visiteur</h5>
 
     {{ include('type_viste/_form.html.twig', {'button_label': 'Update'}) }}
+<div class="d-flex flex-row">
 
-    <a href="{{ path('app_type_viste_index') }}">back to list</a>
+    <a class="btn btn-outline-info btn-sm" href="{{ path('app_type_viste_index') }}">
+        <i class="bi bi-x-squarebi bi-x-square" style="font-size: 1.1rem;"></i>
+    </a>
 
     {{ include('type_viste/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

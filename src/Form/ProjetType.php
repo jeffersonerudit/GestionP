@@ -18,14 +18,14 @@ class ProjetType extends AbstractType
         $builder
             ->add('Nom_Projet')
             ->add('Description_Projet')
-            ->add('Personne', EntityType::class, [
+            ->add('ProjetP', EntityType::class, [
                 'class' => Personne::class,
-'choice_label' => 'nom',
-'multiple' => true,
+                'choice_label' => 'nom',
+                'multiple' => true,
             ])
             ->add('StatutProjet', EntityType::class, [
                 'class' => StatutProjet::class,
-'choice_label' => 'statut_p',
+                'choice_label' => 'statut_p',
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Enregistrer'

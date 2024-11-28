@@ -31,7 +31,7 @@ final class EnveloppeController extends AbstractController{
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($enveloppe);
             $entityManager->flush();
-
+            $this->addFlash('success', 'L'/'enveloppe a été créée avec succès');
             return $this->redirectToRoute('app_enveloppe_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -57,7 +57,7 @@ final class EnveloppeController extends AbstractController{
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-
+            $this->addFlash('success', 'L' / 'enveloppe a été modifiée avec succès');
             return $this->redirectToRoute('app_enveloppe_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -74,7 +74,7 @@ final class EnveloppeController extends AbstractController{
             $entityManager->remove($enveloppe);
             $entityManager->flush();
         }
-
+        $this->addFlash('success', 'L' / 'enveloppe a été supprimée avec succès');
         return $this->redirectToRoute('app_enveloppe_index', [], Response::HTTP_SEE_OTHER);
     }
 }

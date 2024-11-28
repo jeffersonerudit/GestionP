@@ -1,26 +1,38 @@
-{% extends 'base.html.twig' %}
+{% extends 'template.html.twig' %}
+
+{% block PageTitle %}
+	Gestion de Nature des Visiteurs
+{% endblock %}
+
 
 {% block title %}NatureVisite index{% endblock %}
 
 {% block body %}
-    <h1>NatureVisite index</h1>
+{% include 'partials/flash.html.twig' %}
 
-    <table class="table">
+<h5>Liste de Nature des Visiteurs</h5>
+
+<table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nature_V</th>
+                
+                <th>Nature de visite</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for nature_visite in nature_visites %}
             <tr>
-                <td>{{ nature_visite.id }}</td>
+                
                 <td>{{ nature_visite.NatureV }}</td>
                 <td>
-                    <a href="{{ path('app_nature_visite_show', {'id': nature_visite.id}) }}">show</a>
-                    <a href="{{ path('app_nature_visite_edit', {'id': nature_visite.id}) }}">edit</a>
+                    <a class="btn btn-outline-info btn-sm" href="{{ path('app_nature_visite_show', {'id': nature_visite.id}) }}">
+                        <i class="bi bi-view-list" style="font-size: 1rem;"></i>
+                    </a>
+                    <a class="btn btn-outline-primary btn-sm" href="{{ path('app_nature_visite_edit', {'id': nature_visite.id}) }}">
+                        <i class="bi bi-pencil-square" style="font-size: 1.1rem;"></i>
+                    </a>
                 </td>
             </tr>
         {% else %}
@@ -30,6 +42,14 @@
         {% endfor %}
         </tbody>
     </table>
+<div class="d-flex flex-row">
+	<a class="btn btn-outline-info btn-sm" href="{{ path('app_visite') }}">
+		<i class="bi bi-x-squarebi bi-x-square" style="font-size: 1.1rem;"></i>
+	</a>
 
-    <a href="{{ path('app_nature_visite_new') }}">Create new</a>
+    <a class="btn btn-outline-primary btn-sm" href="{{ path('app_nature_visite_new') }}">
+        <i class="bi bi-plus-square" style="font-size: 1.2rem;"></i>
+    </a>
+</div>
+
 {% endblock %}

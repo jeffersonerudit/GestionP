@@ -11,22 +11,33 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bridge\Doctrine\ArgumentResolver\EntityValueResolver;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\TypeInfo\Type;
 
 class PersonneController extends AbstractController
 {
-    #[Route('/personne', name: 'app_personne')]
+    #[Route('/personne', name: 'app_personne'), IsGranted('ROLE_ADMIN')]
     public function index(Request $request, PersonneRepository $repository): Response
     {
+        $superAdmin = ["ROLE_SUPER_ADMIN", "ROLE_ADMIN", "ROLE_STAGE", "ROLE_EDITOR", "ROLE_USER"];
+        $admin = ["ROLE_ADMIN", "STAGE", "ROLE_EDITOR", "ROLE_USER"];
+        $stage = ["STAGE", "ROLE_EDITOR", "ROLE_USER"];
+        $editor = ["ROLE_EDITOR", "ROLE_USER"];
+        $user = [];
+
+          //if ($this->getUser())
+        //{
         $page = $request->query->getInt('page', 1);
         $limit = 4;
         $personnes = $repository->paginatePersonnes($page);
         return $this->render('personne/index.html.twig', [
             'personnes'=> $personnes
         ]);
+        //}
+        //return $this->redirectToRoute('app_login');
     }
     
-    #[Route('/personne/{id}/detail', name: 'personne.detail', methods: ['GET'])]
+    #[Route('/personne/{id}/detail', name: 'personne.detail', methods: ['GET']), IsGranted('ROLE_ADMIN')]
     public function detail(Personne $personne): Response
     {
         return $this->render('personne/detail.html.twig', [
@@ -35,7 +46,7 @@ class PersonneController extends AbstractController
     }
      
 
-    #[Route('/personne/{id}/edit', name: 'personne.edit')]
+    #[Route('/personne/{id}/edit', name: 'personne.edit'), IsGranted('ROLE_ADMIN')]
     public function edit(Personne $personne, Request $request, EntityManagerInterface
      $em)
     {
@@ -59,7 +70,7 @@ class PersonneController extends AbstractController
         ]);
     }
 
-    #[Route('/personne/create', name: 'personne.create')]
+    #[Route('/personne/create', name: 'personne.create'), IsGranted('ROLE_ADMIN')]
     public function create( Request $request, EntityManagerInterface $em): Response
     {
         $personne = new Personne();
@@ -81,7 +92,7 @@ class PersonneController extends AbstractController
         ]);
     }
 
-    #[Route('/personne/{id}', name: 'personne.delete')]
+    #[Route('/personne/{id}', name: 'personne.delete'), IsGranted('ROLE_ADMIN')]
     public function remove(Personne $personne, EntityManagerInterface $em)
     {
         $em->remove($personne);

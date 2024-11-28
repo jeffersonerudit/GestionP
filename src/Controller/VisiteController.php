@@ -11,21 +11,34 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class VisiteController extends AbstractController
 {
-    #[Route('/visite', name: 'app_visite')]
+    #[Route('/visite', name: 'app_visite'), IsGranted('ROLE_USER') ]
     public function index(Request $request, VisteRepository $repository): Response
     {
+        $superAdmin = ["ROLE_SUPER_ADMIN", "ROLE_ADMIN", "ROLE_STAGE", "ROLE_EDITOR", "ROLE_USER"];
+        $admin = ["ROLE_ADMIN","STAGE", "ROLE_EDITOR", "ROLE_USER"];
+        $stage = ["STAGE", "ROLE_EDITOR", "ROLE_USER"];
+        $editor = ["ROLE_EDITOR", "ROLE_USER"];
+        $user = [];
+
+        //if ($this->getUser())//
+        //{
+
         $page = $request->query->getInt('page', 1);
         $limit = 4;
         $visites = $repository->paginateVisites($page);
         return $this->render('visite/index.html.twig', [
             'visites' => $visites
         ]);
+        //}
+        //return $this->redirectToRoute('app_login');
+
     }
 
-    #[Route('/visite/{id}/detail', name: 'visite.detail', methods: ['GET'])]
+    #[Route('/visite/{id}/detail', name: 'visite.detail', methods: ['GET']), IsGranted('ROLE_USER')]
     public function detail(Viste $visite): Response
     {
         return $this->render('visite/detail.html.twig', [
@@ -34,7 +47,7 @@ class VisiteController extends AbstractController
     }
 
 
-    #[Route('/visite/{id}/edit', name: 'visite.edit')]
+    #[Route('/visite/{id}/edit', name: 'visite.edit'), IsGranted('ROLE_EDITOR')]
     public function edit(Viste $visite, Request $request, EntityManagerInterface
     $em)
     {
@@ -58,7 +71,7 @@ class VisiteController extends AbstractController
         ]);
     }
 
-    #[Route('/visite/create', name: 'visite.create')]
+    #[Route('/visite/create', name: 'visite.create'), IsGranted('ROLE_ADMIN')]
     public function create(Request $request, EntityManagerInterface $em): Response
     {
         $visite = new Viste();
@@ -79,7 +92,7 @@ class VisiteController extends AbstractController
         ]);
     }
 
-    #[Route('/visite/{id}', name: 'visite.delete')]
+    #[Route('/visite/{id}', name: 'visite.delete'), IsGranted('ROLE_ADMIN')]
     public function remove(Viste $visite, EntityManagerInterface $em)
     {
         $em->remove($visite);

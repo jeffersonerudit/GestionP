@@ -33,6 +33,18 @@ class StrategieRepository extends ServiceEntityRepository
         );
     }
 
+    public function searchStrategie(string $query)
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s.Nom_Strategie LIKE :query')
+            ->orWhere('s.Description LIKE :query')
+            //->orWhere('s.Budget <= :query')
+            ->setParameter('query', value: '%' . $query . '%')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Strategie[] Returns an array of Strategie objects
 //     */

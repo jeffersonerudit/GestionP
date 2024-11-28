@@ -33,6 +33,20 @@ class PersonneRepository extends ServiceEntityRepository
       );
     }
 
+    public function searchPersonne(string $query)
+    {
+        return $this->createQueryBuilder('p')
+        ->where('p.Nom LIKE :query')
+        ->orWhere('p.Prenom LIKE :query')
+        ->orWhere('p.Societe LIKE :query')
+        ->setParameter('query', value:'%'.$query.'%')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
+
+
 //    /**
 //     * @return Personne[] Returns an array of Personne objects
 //     */

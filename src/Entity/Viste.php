@@ -33,7 +33,7 @@ class Viste
     private ?string $Ville = null;
 
     #[ORM\Column]
-    private ?int $Numero = null;
+    private ?string $Numero = null;
 
     #[ORM\Column(length: 50)]
     private ?string $Mail = null;
@@ -135,12 +135,12 @@ class Viste
         return $this;
     }
 
-    public function getNumero(): ?int
+    public function getNumero(): ?string
     {
         return $this->Numero;
     }
 
-    public function setNumero(int $Numero): static
+    public function setNumero(string $Numero): static
     {
         $this->Numero = $Numero;
 

@@ -33,6 +33,17 @@ class ProjetRepository extends ServiceEntityRepository
         );
     }
 
+    public function searchProjet(string $query)
+    {
+        return $this->createQueryBuilder('j')
+            ->where('j.Nom_Projet LIKE :query')
+            ->orWhere('j.Description_Projet LIKE :query')
+            //->orWhere('j.Societe LIKE :query')
+            ->setParameter('query', value: '%' . $query . '%')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 //    /**
 //     * @return Projet[] Returns an array of Projet objects
 //     */
